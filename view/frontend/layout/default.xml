@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Scandiweb_Slider
+ *
+ * @category    Scandiweb
+ * @package     Scandiweb_Slider
+ * @author      Artis Ozolins <artis@scandiweb.com>
+ * @copyright   Copyright (c) 2016 Scandiweb, Ltd (http://scandiweb.com)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+</page>
