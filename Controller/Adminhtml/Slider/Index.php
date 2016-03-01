@@ -9,11 +9,18 @@
  */
 namespace Scandiweb\Slider\Controller\Adminhtml\Slider;
 
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+
 class Index extends \Magento\Backend\App\Action
 {
+    public function __construct(Context $context, PageFactory $resultPageFactory)
+    {
+        parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
+    }
+
     /**
-     * Check the permission to run it
-     *
      * @return bool
      */
     protected function _isAllowed()
@@ -23,5 +30,11 @@ class Index extends \Magento\Backend\App\Action
 
     public function execute()
     {
+        /* @var $resultPage \Magento\Backend\Model\View\Result\Page\Interceptor */
+        $resultPage = $this->resultPageFactory->create();
+
+        $resultPage->setActiveMenu('Scandiweb_Slider::slider_manage');
+
+        return $resultPage;
     }
 }
