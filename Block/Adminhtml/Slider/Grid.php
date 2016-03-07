@@ -10,6 +10,7 @@
 namespace Scandiweb\Slider\Block\Adminhtml\Slider;
 
 use Magento\Backend\Block\Widget\Grid as WidgetGrid;
+use Magento\Framework\Webapi\Exception;
 
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
@@ -37,5 +38,47 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->setCollection($this->_sliderCollection);
 
         return parent::_prepareCollection();
+    }
+
+    /**
+     * @return \Scandiweb\Slider\Block\Adminhtml\Slider\Grid
+     */
+    protected function _prepareColumns()
+    {
+        $this->addColumn(
+            'slider_id',
+            [
+                'header' => __('ID'),
+                'index' => 'slider_id',
+            ]
+        );
+
+        $this->addColumn(
+            'block_id',
+            [
+                'header' => __('Identifier'),
+                'index' => 'block_id',
+            ]
+        );
+
+        $this->addColumn(
+            'title',
+            [
+                'header' => __('Title'),
+                'index' => 'slider_id',
+            ]
+        );
+
+        $this->addColumn(
+            'is_active',
+            [
+                'header' => __('Status'),
+                'index' => 'is_active',
+                'type' => 'options',
+                'options' => [0 => __('Disabled'), 1 => __('Enabled')]
+            ]
+        );
+
+        return $this;
     }
 }

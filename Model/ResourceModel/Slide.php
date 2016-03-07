@@ -7,12 +7,12 @@
  * @author      Artis Ozolins <artis@scandiweb.com>
  * @copyright   Copyright (c) 2016 Scandiweb, Ltd (http://scandiweb.com)
  */
-namespace Scandiweb\Slider\Model;
+namespace Scandiweb\Slider\Model\ResourceModel;
 
-class Slider extends \Magento\Framework\Model\AbstractModel
+class Slide extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
-    public function _construct()
+    protected function _construct()
     {
-        $this->_init('Scandiweb\Slider\Model\ResourceModel\Slider');
+        $this->_init('scandiweb_slider_image', 'image_id');
     }
 }

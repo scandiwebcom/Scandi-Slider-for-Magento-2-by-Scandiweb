@@ -9,10 +9,10 @@
  */
 namespace Scandiweb\Slider\Model;
 
-class Slider extends \Magento\Framework\Model\AbstractModel
+class Slide extends \Magento\Framework\Model\AbstractModel
 {
     public function _construct()
     {
-        $this->_init('Scandiweb\Slider\Model\ResourceModel\Slider');
+        $this->_init('Scandiweb\Slider\Model\ResourceModel\Slide');
     }
 }

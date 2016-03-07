@@ -180,6 +180,18 @@ class InstallSchema implements InstallSchemaInterface
                 ['nullable' => false, 'default' => '0'],
                 'Slide position'
             )->addColumn(
+                'start_time',
+                Table::TYPE_DATETIME,
+                null,
+                ['nullable' => true],
+                'Slide starting time'
+            )->addColumn(
+                'end_time',
+                Table::TYPE_DATETIME,
+                null,
+                ['nullable' => true],
+                'Slide ending time'
+            )->addColumn(
                 'slide_link',
                 Table::TYPE_TEXT,
                 255,
