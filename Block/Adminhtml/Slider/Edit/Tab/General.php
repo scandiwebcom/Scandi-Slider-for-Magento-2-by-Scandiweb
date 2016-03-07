@@ -25,10 +25,15 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
 
         $form->setHtmlIdPrefix('slider_');
 
+        /* @var $fieldset \Magento\Framework\Data\Form\Element\Fieldset */
         $fieldset = $form->addFieldset(
             'content_fieldset',
             ['legend' => __('General'), 'class' => 'fieldset-wide']
         );
+
+        if ($model->getSliderId()) {
+            $fieldset->addField('slider_id', 'hidden', ['name' => 'slider_id']);
+        }
 
         $fieldset->addField(
             'block_id',
@@ -37,7 +42,8 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
                 'name' => 'block_id',
                 'label' => __('Slider Block ID'),
                 'title' => __('Slider Block ID'),
-                'note' =>  __('Must be unique')
+                'note' =>  __('Must be unique'),
+                'required' => true,
             ]
         );
 
@@ -48,6 +54,7 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
                 'name' => 'title',
                 'label' => __('Slider Title'),
                 'title' => __('Slider Title'),
+                'required' => true,
             ]
         );
 

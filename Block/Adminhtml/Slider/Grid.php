@@ -10,7 +10,6 @@
 namespace Scandiweb\Slider\Block\Adminhtml\Slider;
 
 use Magento\Backend\Block\Widget\Grid as WidgetGrid;
-use Magento\Framework\Webapi\Exception;
 
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
@@ -65,7 +64,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             'title',
             [
                 'header' => __('Title'),
-                'index' => 'slider_id',
+                'index' => 'title',
             ]
         );
 
@@ -80,5 +79,17 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         );
 
         return $this;
+    }
+
+    /**
+     * @param  object $row
+     * @return string
+     */
+    public function getRowUrl($row)
+    {
+        return $this->getUrl(
+            '*/*/edit',
+            ['slider_id' => $row->getId()]
+        );
     }
 }
