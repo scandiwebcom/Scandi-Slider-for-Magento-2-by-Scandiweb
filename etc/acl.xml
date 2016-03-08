@@ -19,6 +19,10 @@
                             <resource id="Scandiweb_Slider::slider_save" title="Save Slider" sortOrder="10" />
                             <resource id="Scandiweb_Slider::slider_delete" title="Delete Slider" sortOrder="20" />
                         </resource>
+                        <resource id="Scandiweb_Slider::slide_manage" title="Manage Slides" sortOrder="20">
+                            <resource id="Scandiweb_Slider::slide_save" title="Save Slide" sortOrder="10" />
+                            <resource id="Scandiweb_Slider::slide_delete" title="Delete Slide" sortOrder="20" />
+                        </resource>
                     </resource>
                 </resource>
             </resource>

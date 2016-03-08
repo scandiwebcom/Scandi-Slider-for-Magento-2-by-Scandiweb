@@ -7,11 +7,11 @@
  * @author      Artis Ozolins <artis@scandiweb.com>
  * @copyright   Copyright (c) 2016 Scandiweb, Ltd (http://scandiweb.com)
  */
-namespace Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tab;
+namespace Scandiweb\Slider\Block\Adminhtml\Slide;
 
 use Magento\Backend\Block\Widget\Grid as WidgetGrid;
 
-class Slide extends \Magento\Backend\Block\Widget\Grid\Extended
+class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /* @var \Scandiweb\Slider\Model\ResourceModel\Slide\Collection $_slideCollection */
     protected $_slideCollection;
@@ -24,11 +24,11 @@ class Slide extends \Magento\Backend\Block\Widget\Grid\Extended
     ) {
         $this->_slideCollection = $slideCollection;
         parent::__construct($context, $backendHelper, $data);
-        $this->setEmptyText(__('No Slider Found'));
+        $this->setEmptyText(__('No Slides Found'));
     }
 
     /**
-     * @return \Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tab\Slide
+     * @return \Scandiweb\Slider\Block\Adminhtml\Slide\Edit\Tab\Slide
      */
     protected function _prepareCollection()
     {
@@ -38,7 +38,7 @@ class Slide extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @return \Scandiweb\Slider\Block\Adminhtml\Slider\Grid
+     * @return \Scandiweb\Slider\Block\Adminhtml\Slide\Grid
      */
     protected function _prepareColumns()
     {

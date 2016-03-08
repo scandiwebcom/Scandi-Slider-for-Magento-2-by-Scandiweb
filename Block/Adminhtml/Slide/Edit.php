@@ -1,13 +1,13 @@
 <?php
 /**
- * Scandiweb_Slider
+ * Scandiweb_Slide
  *
  * @category    Scandiweb
- * @package     Scandiweb_Slider
+ * @package     Scandiweb_Slide
  * @author      Artis Ozolins <artis@scandiweb.com>
  * @copyright   Copyright (c) 2016 Scandiweb, Ltd (http://scandiweb.com)
  */
-namespace Scandiweb\Slider\Block\Adminhtml\Slider;
+namespace Scandiweb\Slider\Block\Adminhtml\Slide;
 
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {
@@ -30,14 +30,14 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
 
     protected function _construct()
     {
-        $this->_objectId = 'slider_id';
+        $this->_objectId = 'slide_id';
         $this->_blockGroup = 'Scandiweb_Slider';
-        $this->_controller = 'adminhtml_slider';
+        $this->_controller = 'adminhtml_slide';
 
         parent::_construct();
 
-        if ($this->_isAllowedAction('Scandiweb_Slider::slider_save')) {
-            $this->buttonList->update('save', 'label', __('Save Slider'));
+        if ($this->_isAllowedAction('Scandiweb_Slide::slide_save')) {
+            $this->buttonList->update('save', 'label', __('Save Slide'));
             $this->buttonList->add(
                 'saveandcontinue',
                 [
@@ -55,8 +55,8 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             $this->buttonList->remove('save');
         }
 
-        if ($this->_isAllowedAction('Scandiweb_Slider::slider_delete')) {
-            $this->buttonList->update('delete', 'label', __('Delete Slider'));
+        if ($this->_isAllowedAction('Scandiweb_Slider::slide_delete')) {
+            $this->buttonList->update('delete', 'label', __('Delete Slide'));
         } else {
             $this->buttonList->remove('delete');
         }
@@ -67,10 +67,10 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getHeaderText()
     {
-        if ($this->_coreRegistry->registry('slider')->getId()) {
-            return __("Edit Slider '%1'", $this->escapeHtml($this->_coreRegistry->registry('slider')->getTitle()));
+        if ($this->_coreRegistry->registry('slide')->getId()) {
+            return __("Edit Slide '%1'", $this->escapeHtml($this->_coreRegistry->registry('slide')->getTitle()));
         } else {
-            return __('New Slider');
+            return __('New Slide');
         }
     }
 

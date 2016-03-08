@@ -11,11 +11,13 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <container name="root" label="Root">
-        <block class="Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tab\Slide" name="slider_slide_edit_tab_slide"/>
+        <block class="Scandiweb\Slider\Block\Adminhtml\Slide" name="slider_slide_grid_container">
+            <block class="Scandiweb\Slider\Block\Adminhtml\Slide\Grid" name="grid"/>
+        </block>
         <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="slider_slide_grid_serializer">
             <arguments>
                 <argument name="input_names" xsi:type="string">slider_slide</argument>
-                <argument name="grid_block" xsi:type="string">slider_slide_edit_tab_slide</argument>
+                <argument name="grid_block" xsi:type="string">grid</argument>
                 <argument name="callback" xsi:type="string">getSelectedSlides</argument>
                 <argument name="input_element_name" xsi:type="string">slider_slide</argument>
                 <argument name="reload_param_name" xsi:type="string">slide</argument>
