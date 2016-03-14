@@ -24,6 +24,9 @@ class Slide extends \Magento\Backend\Block\Widget\Grid\Container
      */
     public function getCreateUrl()
     {
-        return $this->getUrl('slideradmin/slide/new');
+        return $this->getUrl(
+            'slideradmin/slide/new',
+            ['slider_id' => $this->_request->getParam('slider_id')]
+        );
     }
 }

@@ -67,7 +67,7 @@ class Edit extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam('image_id');
+        $id = $this->getRequest()->getParam('slide_id');
         $model = $this->_objectManager->create('Scandiweb\Slider\Model\Slide');
 
         if ($id) {
@@ -84,6 +84,10 @@ class Edit extends \Magento\Backend\App\Action
         $data = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
         if (!empty($data)) {
             $model->setData($data);
+        }
+
+        if ($sliderId = $this->_request->getParam('slider_id')) {
+            $model->setData('slider_id', $sliderId);
         }
 
         $this->_coreRegistry->register('slide', $model);

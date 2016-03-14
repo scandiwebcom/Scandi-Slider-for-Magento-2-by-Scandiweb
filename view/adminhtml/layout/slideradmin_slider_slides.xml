@@ -11,6 +11,7 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <container name="root" label="Root">
+        <referenceContainer name="require.js" remove="true"/>
         <block class="Scandiweb\Slider\Block\Adminhtml\Slide" name="slider_slide_grid_container">
             <block class="Scandiweb\Slider\Block\Adminhtml\Slide\Grid" name="grid"/>
         </block>

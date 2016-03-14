@@ -47,21 +47,6 @@ class Edit extends \Magento\Backend\App\Action
     }
 
     /**
-     * Init actions
-     *
-     * @return \Magento\Backend\Model\View\Result\Page
-     */
-    protected function _initAction()
-    {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->resultPageFactory->create();
-
-        return $resultPage;
-    }
-
-    /**
-     * Edit slider
-     *
      * @return \Magento\Backend\Model\View\Result\Page|\Magento\Backend\Model\View\Result\Redirect
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
@@ -88,9 +73,6 @@ class Edit extends \Magento\Backend\App\Action
 
         $this->_coreRegistry->register('slider', $model);
 
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->_initAction();
-
-        return $resultPage;
+        return $this->resultPageFactory->create();
     }
 }

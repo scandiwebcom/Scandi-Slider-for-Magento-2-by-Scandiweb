@@ -66,6 +66,10 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
             $fieldset->addField('slider_id', 'hidden', ['name' => 'slider_id']);
         }
 
+        if ($model->getSlideId()) {
+            $fieldset->addField('slide_id', 'hidden', ['name' => 'slide_id']);
+        }
+
         $fieldset->addField(
             'title',
             'text',
@@ -213,7 +217,6 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
                 'title' => __('Slide Text'),
                 'name' => 'slide_text',
                 'style' => 'height:36em;',
-                'required' => true,
                 'config' => $wysiwygConfig,
             ]
         );

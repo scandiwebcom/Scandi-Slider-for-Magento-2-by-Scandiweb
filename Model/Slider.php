@@ -12,6 +12,8 @@ namespace Scandiweb\Slider\Model;
 /**
  * @method int getSliderId()
  * @method \Scandiweb\Slider\Model\Slider setSliderId(int $value)
+ * @method int getBlockId()
+ * @method \Scandiweb\Slider\Model\Slider setBlockId(int $value)
  * @method string getTitle()
  * @method \Scandiweb\Slider\Model\Slider setTitle(string $value)
  * @method bool getIsActive()
@@ -43,6 +45,8 @@ namespace Scandiweb\Slider\Model;
  */
 class Slider extends \Magento\Framework\Model\AbstractModel
 {
+    const MEDIA_PATH = 'scandiweb/slider';
+
     public function _construct()
     {
         $this->_init('Scandiweb\Slider\Model\ResourceModel\Slider');

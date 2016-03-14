@@ -93,4 +93,15 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']
         );
     }
+
+    /**
+     * @return string
+     */
+    public function getBackUrl()
+    {
+        return $this->getUrl(
+            'slideradmin/slider/edit',
+            ['slider_id' => $this->_coreRegistry->registry('slide')->getSliderId()]
+        );
+    }
 }

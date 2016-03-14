@@ -43,10 +43,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _prepareColumns()
     {
         $this->addColumn(
-            'image_id',
+            'slide_id',
             [
                 'header' => __('Slide Id'),
-                'index' => 'image_id',
+                'index' => 'slide_id',
             ]
         );
 
@@ -119,5 +119,17 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         );
 
         return $this;
+    }
+
+    /**
+     * @param  object $row
+     * @return string
+     */
+    public function getRowUrl($row)
+    {
+        return $this->getUrl(
+            'slideradmin/slide/edit',
+            ['slide_id' => $row->getId()]
+        );
     }
 }

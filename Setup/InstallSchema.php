@@ -142,9 +142,9 @@ class InstallSchema implements InstallSchemaInterface
          * Create slider image table
          */
         $table = $installer->getConnection()
-            ->newTable($installer->getTable('scandiweb_slider_image'))
+            ->newTable($installer->getTable('scandiweb_slider_slide'))
             ->addColumn(
-                'image_id',
+                'slide_id',
                 Table::TYPE_INTEGER,
                 null,
                 ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
@@ -162,7 +162,7 @@ class InstallSchema implements InstallSchemaInterface
                 ['nullable' => false],
                 'Slide title'
             )->addColumn(
-                'image_location',
+                'image',
                 Table::TYPE_TEXT,
                 255,
                 [],
@@ -228,16 +228,16 @@ class InstallSchema implements InstallSchemaInterface
                 ['nullable' => false, 'default' => '0'],
                 'Slide text position'
             )->addIndex(
-                $installer->getIdxName('scandiweb_slider_image', ['image_id']),
-                ['image_id']
+                $installer->getIdxName('scandiweb_slider_slide', ['slide_id']),
+                ['slide_id']
             )->addIndex(
-                $installer->getIdxName('scandiweb_slider_image', ['slider_id']),
+                $installer->getIdxName('scandiweb_slider_slide', ['slider_id']),
                 ['slider_id']
             )->addIndex(
-                $installer->getIdxName('scandiweb_slider_image', ['position']),
+                $installer->getIdxName('scandiweb_slider_slide', ['position']),
                 ['position']
             )->addForeignKey(
-                $installer->getFkName('scandiweb_slider_image', 'slider_id', 'scandiweb_slider', 'slider_id'),
+                $installer->getFkName('scandiweb_slider_slide', 'slider_id', 'scandiweb_slider', 'slider_id'),
                 'slider_id',
                 $installer->getTable('scandiweb_slider'),
                 'slider_id',
@@ -248,9 +248,9 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->createTable($table);
 
         $table = $installer->getConnection()
-            ->newTable($installer->getTable('scandiweb_slider_image_store'))
+            ->newTable($installer->getTable('scandiweb_slider_slide_store'))
             ->addColumn(
-                'image_id',
+                'slide_id',
                 Table::TYPE_INTEGER,
                 null,
                 ['unsigned' => true, 'nullable' => false],
@@ -259,19 +259,19 @@ class InstallSchema implements InstallSchemaInterface
                 'store_id',
                 Table::TYPE_SMALLINT,
                 null,
-                ['unsigned' => true, 'nullable' => false, 'primary' => true],
+                ['unsigned' => true, 'nullable' => false],
                 'Store ID'
             )->addIndex(
-                $installer->getIdxName('scandiweb_slider_image_store', ['image_id']),
-                ['image_id']
+                $installer->getIdxName('scandiweb_slider_slide_store', ['slide_id']),
+                ['slide_id']
             )->addForeignKey(
-                $installer->getFkName('scandiweb_slider_image_store', 'image_id', 'scandiweb_slider_image', 'image_id'),
-                'image_id',
-                $installer->getTable('scandiweb_slider_image'),
-                'image_id',
+                $installer->getFkName('scandiweb_slider_slide_store', 'slide_id', 'scandiweb_slider_slide', 'slide_id'),
+                'slide_id',
+                $installer->getTable('scandiweb_slider_slide'),
+                'slide_id',
                 Table::ACTION_CASCADE
             )->addForeignKey(
-                $installer->getFkName('scandiweb_slider_image_store', 'store_id', 'store', 'store_id'),
+                $installer->getFkName('scandiweb_slider_slide_store', 'store_id', 'store', 'store_id'),
                 'store_id',
                 $installer->getTable('store'),
                 'store_id',
@@ -282,9 +282,9 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->createTable($table);
 
         $table = $installer->getConnection()
-            ->newTable($installer->getTable('scandiweb_slider_image_map'))
+            ->newTable($installer->getTable('scandiweb_slider_slide_map'))
             ->addColumn(
-                'image_id',
+                'slide_id',
                 Table::TYPE_INTEGER,
                 null,
                 ['unsigned' => true, 'nullable' => false],
@@ -314,13 +314,13 @@ class InstallSchema implements InstallSchemaInterface
                 ['unsigned' => true, 'nullable' => true],
                 'Product id'
             )->addIndex(
-                $installer->getIdxName('scandiweb_slider_image_map', ['image_id']),
-                ['image_id']
+                $installer->getIdxName('scandiweb_slider_slide_map', ['slide_id']),
+                ['slide_id']
             )->addForeignKey(
-                $installer->getFkName('scandiweb_slider_image_map', 'image_id', 'scandiweb_slider_image', 'image_id'),
-                'image_id',
-                $installer->getTable('scandiweb_slider_image'),
-                'image_id',
+                $installer->getFkName('scandiweb_slider_slide_map', 'slide_id', 'scandiweb_slider_slide', 'slide_id'),
+                'slide_id',
+                $installer->getTable('scandiweb_slider_slide'),
+                'slide_id',
                 Table::ACTION_CASCADE
             );
 
