@@ -7,22 +7,22 @@
  * @author      Artis Ozolins <artis@scandiweb.com>
  * @copyright   Copyright (c) 2016 Scandiweb, Ltd (http://scandiweb.com)
  */
-namespace Scandiweb\Slider\Model\ResourceModel\Slide;
+namespace Scandiweb\Slider\Model\ResourceModel\Map;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     public function _construct()
     {
-        $this->_init('Scandiweb\Slider\Model\Slide', 'Scandiweb\Slider\Model\ResourceModel\Slide');
+        $this->_init('Scandiweb\Slider\Model\Map', 'Scandiweb\Slider\Model\ResourceModel\Map');
     }
 
     /**
-     * @param  int $sliderId
+     * @param  int $slideId
      * @return $this
      */
-    public function addSliderFilter($sliderId)
+    public function addSlideFilter($sliderId)
     {
-        $this->addFieldToFilter('slider_id', $sliderId);
+        $this->addFieldToFilter('slide_id', $sliderId);
 
         return $this;
     }

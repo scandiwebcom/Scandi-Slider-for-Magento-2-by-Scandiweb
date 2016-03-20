@@ -26,7 +26,7 @@
                     <argument name="block" xsi:type="array">
                         <item name="label" xsi:type="string">Image Maps</item>
                         <item name="title" xsi:type="string">Image Maps</item>
-                        <item name="url" xsi:type="helper" helper="Scandiweb\Slider\Helper\Data::slidesGridUrl"/>
+                        <item name="url" xsi:type="helper" helper="Scandiweb\Slider\Helper\Data::mapGridUrl"/>
                         <item name="class" xsi:type="string">ajax</item>
                     </argument>
                 </action>

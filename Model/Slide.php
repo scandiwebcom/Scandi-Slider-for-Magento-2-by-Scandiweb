@@ -35,8 +35,45 @@ namespace Scandiweb\Slider\Model;
  */
 class Slide extends \Magento\Framework\Model\AbstractModel
 {
+    /* @var \Magento\Store\Model\StoreManagerInterface $_storeManager */
+    protected $_storeManager;
+
     public function _construct()
     {
         $this->_init('Scandiweb\Slider\Model\ResourceModel\Slide');
+    }
+
+    /**
+     * @param \Magento\Framework\Model\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \Scandiweb\Slider\Model\ResourceModel\Slide $resource
+     * @param \Scandiweb\Slider\Model\ResourceModel\Slide\Collection $resourceCollection
+     * @param array $data
+     */
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Scandiweb\Slider\Model\ResourceModel\Slide $resource = null,
+        \Scandiweb\Slider\Model\ResourceModel\Slide\Collection $resourceCollection = null,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        array $data = []
+    ) {
+        $this->_storeManager = $storeManager;
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+    }
+
+    /**
+     * @param  bool $secure
+     * @return string|bool
+     */
+    public function getImageUrl($secure = false)
+    {
+        if (!$this->getImage()) {
+            return false;
+        }
+
+        $base = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA, $secure);
+
+        return $base . $this->getImage();
     }
 }

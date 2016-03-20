@@ -23,6 +23,10 @@
                             <resource id="Scandiweb_Slider::slide_save" title="Save Slide" sortOrder="10" />
                             <resource id="Scandiweb_Slider::slide_delete" title="Delete Slide" sortOrder="20" />
                         </resource>
+                        <resource id="Scandiweb_Slider::map_manage" title="Manage Image Maps" sortOrder="30">
+                            <resource id="Scandiweb_Slider::map_save" title="Save Image Map" sortOrder="10" />
+                            <resource id="Scandiweb_Slider::map_delete" title="Delete Image Map" sortOrder="20" />
+                        </resource>
                     </resource>
                 </resource>
             </resource>

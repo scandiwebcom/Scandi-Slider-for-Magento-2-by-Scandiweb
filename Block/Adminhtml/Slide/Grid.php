@@ -16,12 +16,17 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /* @var \Scandiweb\Slider\Model\ResourceModel\Slide\Collection $_slideCollection */
     protected $_slideCollection;
 
+    /* @var \Magento\Framework\Registry $_registry */
+    protected $_registry;
+
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         \Scandiweb\Slider\Model\ResourceModel\Slide\Collection $slideCollection,
+        \Magento\Framework\Registry $registry,
         array $data = []
     ) {
+        $this->_registry = $registry;
         $this->_slideCollection = $slideCollection;
         parent::__construct($context, $backendHelper, $data);
         $this->setEmptyText(__('No Slides Found'));
@@ -32,6 +37,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection()
     {
+        $this->_slideCollection
+            ->addSliderFilter($this->_request->getParam('slider_id'));
+
         $this->setCollection($this->_slideCollection);
 
         return parent::_prepareCollection();
@@ -64,6 +72,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'header' => __('Image'),
                 'index' => 'image',
                 'filter' => false,
+                'renderer' => 'Scandiweb\Slider\Block\Adminhtml\Grid\Column\Image'
             ]
         );
 
@@ -131,5 +140,18 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             'slideradmin/slide/edit',
             ['slide_id' => $row->getId()]
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function toHtml()
+    {
+        if (!$this->_request->getParam('slider_id')) {
+
+            return __('Please save the slider before adding slides.');
+        }
+
+        return parent::toHtml();
     }
 }

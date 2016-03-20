@@ -233,7 +233,10 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
             ]
         );
 
-        $form->setValues($model->getData());
+        $values = $model->getData();
+        $values['image'] = $model->getImageUrl();
+
+        $form->setValues($values);
         $this->setForm($form);
 
         return parent::_prepareForm();

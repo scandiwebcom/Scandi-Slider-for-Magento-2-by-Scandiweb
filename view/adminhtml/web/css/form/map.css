@@ -1,0 +1,8 @@
+.field-coordinates .admin__field-control {
+    overflow-x: scroll;
+}
+
+.field-coordinates .admin__field-control textarea,
+.field-coordinates .admin__field-control canvas {
+    margin-bottom: 40px;
+}

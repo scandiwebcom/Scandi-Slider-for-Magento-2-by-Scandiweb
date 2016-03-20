@@ -37,6 +37,8 @@ class Save extends \Magento\Backend\App\Action
                 $model->load($id);
             }
 
+            unset($data['image']);
+
             $model->setData($data);
 
             try {

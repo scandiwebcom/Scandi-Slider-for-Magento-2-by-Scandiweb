@@ -16,10 +16,10 @@
         </referenceContainer>
         <referenceContainer name="left">
             <block class="Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tabs" name="slider_edit_tabs">
-                <block class="Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tab\General" name="slider_edit_tab_general"/>
+                <block class="Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tab\Slider" name="slider_edit_tab_slider"/>
                 <action method="addTab">
                     <argument name="name" xsi:type="string">general_section</argument>
-                    <argument name="block" xsi:type="string">slider_edit_tab_general</argument>
+                    <argument name="block" xsi:type="string">slider_edit_tab_slider</argument>
                 </action>
                 <action method="addTab">
                     <argument name="name" xsi:type="string">slide_section</argument>

@@ -9,7 +9,7 @@
  */
 namespace Scandiweb\Slider\Block\Adminhtml\Slider\Edit\Tab;
 
-class General extends \Magento\Backend\Block\Widget\Form\Generic implements
+class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Backend\Block\Widget\Tab\TabInterface
 {
     /**

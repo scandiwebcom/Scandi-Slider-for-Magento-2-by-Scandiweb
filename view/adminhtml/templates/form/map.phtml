@@ -1,0 +1,13 @@
+<script type="text/javascript">
+    //<![CDATA[
+    require(['jquery', 'Scandiweb_Slider/js/canvas-area-draw'], function($) {
+        var coordinatesInput = $('#coordinates'),
+            imageLocation = $('#image_location');
+
+        coordinatesInput.attr('data-image-url', imageLocation.val())
+            .canvasAreaDraw({
+                imgUrl: imageLocation.val()
+            });
+    });
+    //]]>
+</script>

@@ -284,6 +284,12 @@ class InstallSchema implements InstallSchemaInterface
         $table = $installer->getConnection()
             ->newTable($installer->getTable('scandiweb_slider_slide_map'))
             ->addColumn(
+                'map_id',
+                Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Map id'
+            )->addColumn(
                 'slide_id',
                 Table::TYPE_INTEGER,
                 null,

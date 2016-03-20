@@ -40,4 +40,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->_backendUrl->getUrl('*/*/slides', ['_current' => true]);
     }
+
+    /**
+     * @return string
+     */
+    public function mapGridUrl()
+    {
+        return $this->_backendUrl->getUrl('*/*/maps', ['_current' => true]);
+    }
 }
