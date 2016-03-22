@@ -30,6 +30,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->_mapCollection = $mapCollection;
         parent::__construct($context, $backendHelper, $data);
         $this->setEmptyText(__('No Maps Found'));
+        $this->setId('mapGrid');
+        $this->setUseAjax(true);
     }
 
     /**

@@ -30,6 +30,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->_slideCollection = $slideCollection;
         parent::__construct($context, $backendHelper, $data);
         $this->setEmptyText(__('No Slides Found'));
+        $this->setId('slideGrid');
+        $this->setUseAjax(true);
     }
 
     /**

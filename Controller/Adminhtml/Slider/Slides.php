@@ -14,16 +14,15 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Slides extends \Magento\Backend\App\Action
 {
-    public function __construct(Context $context, PageFactory $resultPageFactory)
+    public function __construct(Context $context, \Magento\Framework\View\Result\LayoutFactory $layoutFactory)
     {
         parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
+        $this->layoutFactory = $layoutFactory;
     }
 
     public function execute()
     {
-        /* @var $resultPage \Magento\Backend\Model\View\Result\Page\Interceptor */
-        $resultPage = $this->resultPageFactory->create();
+        $resultPage = $this->layoutFactory->create();
 
         return $resultPage;
     }
