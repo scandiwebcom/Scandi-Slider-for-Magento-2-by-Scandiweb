@@ -17,6 +17,10 @@ class Slide extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_controller = 'adminhtml_slide';
 
         parent::_construct();
+
+        if ($this->getRequest()->getParam('ajax') || !$this->_request->getParam('slider_id')) {
+            $this->removeButton('add');
+        }
     }
 
     /**

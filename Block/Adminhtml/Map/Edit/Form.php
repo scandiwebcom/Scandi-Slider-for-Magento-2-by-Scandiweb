@@ -14,11 +14,17 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     /* @var $_slideModel \Scandiweb\Slider\Model\Slide $slide */
     protected $_slideModel;
 
+    /* @var $_productModel \Magento\Catalog\Model\Product */
+    protected $_productModel;
+
     /**
+     * Form constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param \Scandiweb\Slider\Model\Slide $slide,
+     * @param \Scandiweb\Slider\Model\Slide $slide
+     * @param \Magento\Framework\View\LayoutFactory $layoutFactory
+     * @param \Magento\Catalog\Model\Product $product
      * @param array $data
      */
     public function __construct(
@@ -26,11 +32,14 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         \Scandiweb\Slider\Model\Slide $slide,
+        \Magento\Framework\View\LayoutFactory $layoutFactory,
+        \Magento\Catalog\Model\Product $product,
         array $data = []
     ) {
         $this->_coreRegistry = $registry;
         $this->_formFactory = $formFactory;
         $this->_slideModel = $slide;
+        $this->_productModel = $product;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -90,6 +99,54 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'options' => ['1' => __('Enabled'), '0' => __('Disabled')]
             ]
         );
+
+        $uniqId = $this->mathRandom->getUniqueHash($this->getId());
+
+        $chooserElement = $fieldset->addField(
+            'product_chooser',
+            'note',
+            [
+                'label' => __('Product'),
+                'title' => __('Product'),
+                'name'  => 'selected_product',
+                'class' => 'button',
+                'required' => '1',
+            ]
+        );
+
+
+        $sourceUrl = $this->getUrl(
+            'catalog/product_widget/chooser',
+            ['uniq_id' => $uniqId, 'use_massaction' => false]
+        );
+
+        /* @var \Magento\Widget\Block\Adminhtml\Widget\Chooser $chooserBlock */
+        $chooserBlock = $this->_layout->createBlock(
+            '\Magento\Widget\Block\Adminhtml\Widget\Chooser',
+            'product_chooser_block'
+        );
+
+
+        if ($model->getProductId()) {
+            $this->_productModel->load($model->getProductId());
+        }
+
+        $chooserElement->setValue($model->getProductId());
+
+        $chooserBlock->setData([
+            'element'     => $chooserElement,
+            'fieldset_id' => 'content_fieldset',
+            'uniq_id'     => $uniqId,
+            'source_url'  => $sourceUrl,
+            'config'      => [
+                'label' => ''
+            ],
+            'label' => $this->_productModel->getName(),
+        ]);
+
+        $chooserElement->setData('before_element_html', $chooserBlock->toHtml());
+
+        $this->getForm()->getElement('chooserproduct_chooser')->setValue('value', $model->getProductId());
 
         $this->_slideModel->load($model->getSlideId());
 

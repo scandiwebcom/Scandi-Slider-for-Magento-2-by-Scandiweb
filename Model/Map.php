@@ -9,7 +9,7 @@
  */
 namespace Scandiweb\Slider\Model;
 
-/*
+/**
  * @method int getMapId()
  * @method \Scandiweb\Slider\Model\Map setMapId(int $value)
  * @method int getSlideId()

@@ -17,6 +17,10 @@ class Map extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_controller = 'adminhtml_map';
 
         parent::_construct();
+
+        if ($this->getRequest()->getParam('ajax') || !$this->_request->getParam('slide_id')) {
+            $this->removeButton('add');
+        }
     }
 
     /**

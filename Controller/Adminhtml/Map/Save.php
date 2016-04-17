@@ -29,13 +29,16 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
 
-            /* @var $model /Scandiweb/Slider/Model/Map */
+            /* @var $model \Scandiweb\Slider\Model\Map */
             $model = $this->_objectManager->create('Scandiweb\Slider\Model\Map');
 
             $id = $this->getRequest()->getParam('map_id');
             if ($id) {
                 $model->load($id);
             }
+
+            $idPath = explode('/', str_replace('product/', '', $data['selected_product']));
+            $data['product_id'] = $idPath[0];
 
             $model->setData($data);
 
@@ -44,10 +47,10 @@ class Save extends \Magento\Backend\App\Action
                 $this->messageManager->addSuccess(__('Map successfully saved.'));
                 $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['map_id' => $model->getId(), '_current' => true]);
+                    return $resultRedirect->setPath('*/*/edit', ['map_id' => $model->getMapId(), '_current' => true]);
                 }
 
-                return $resultRedirect->setPath('slideradmin/slide/edit', ['map_id' => $model->getSlideId()]);
+                return $resultRedirect->setPath('slideradmin/map/edit', ['map_id' => $model->getId()]);
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\RuntimeException $e) {
