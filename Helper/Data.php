@@ -15,11 +15,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_backendUrl;
 
     /**
-     * @param \Magento\Framework\App\Helper\Context                      $context
-     * @param \Magento\Directory\Helper\Data                             $directoryData
-     * @param \Magento\Directory\Model\ResourceModel\Country\Collection       $countryCollection
-     * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regCollectionFactory
-     * @param \Magento\Store\Model\StoreManagerInterface                 $storeManager
+     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Backend\Model\UrlInterface $backendUrl
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,

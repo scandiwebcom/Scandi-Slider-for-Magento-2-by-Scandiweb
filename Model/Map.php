@@ -20,8 +20,8 @@ namespace Scandiweb\Slider\Model;
  * @method \Scandiweb\Slider\Model\Map setCoordinates(string $value)
  * @method bool getIsActive()
  * @method \Scandiweb\Slider\Model\Map setIsActive(bool $value)
- * @method int setProductId()
- * @method \Scandiweb\Slider\Model\Map getProductId(int $value)
+ * @method int getProductId()
+ * @method \Scandiweb\Slider\Model\Map setProductId(int $value)
  */
 class Map extends \Magento\Framework\Model\AbstractModel
 {
