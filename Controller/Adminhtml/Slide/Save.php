@@ -43,6 +43,7 @@ class Save extends \Magento\Backend\App\Action
 
             try {
                 if (isset($_FILES['image']['name']) && $_FILES['image']['name']) {
+                    /* @var \Magento\MediaStorage\Model\File\Uploader $uploader */
                     $uploader = $this->_objectManager->create(
                         'Magento\MediaStorage\Model\File\Uploader',
                         ['fileId' => 'image']

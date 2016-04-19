@@ -36,18 +36,6 @@ class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
         }
 
         $fieldset->addField(
-            'block_id',
-            'text',
-            [
-                'name' => 'block_id',
-                'label' => __('Slider Block ID'),
-                'title' => __('Slider Block ID'),
-                'note' =>  __('Must be unique'),
-                'required' => true,
-            ]
-        );
-
-        $fieldset->addField(
             'title',
             'text',
             [

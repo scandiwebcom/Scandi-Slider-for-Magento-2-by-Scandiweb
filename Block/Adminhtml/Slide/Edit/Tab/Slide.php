@@ -93,12 +93,12 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
         );
 
         $fieldset->addField(
-            'iframe_url',
+            'embed_code',
             'text',
             [
-                'label' => __('Slide Link'),
-                'title' => __('Slide Link'),
-                'name' => 'iframe_url',
+                'label' => __('Video Embed Code'),
+                'title' => __('Video Embed Code'),
+                'name' => 'embed_code',
                 'note' => __(
                     'Copy youtube or vimeo or any iframe code from "share" '
                     . 'tab here if you want to display video in slide.'

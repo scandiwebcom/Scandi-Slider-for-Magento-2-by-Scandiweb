@@ -9,4 +9,26 @@
  */
 /* @var Scandiweb\Slider\Block\Widget\Slider $block */
 ?>
+<div class="sw-slider" id="sw-slider-<?php echo $block->getSliderId() ?>">
+    <?php foreach ($this->getSlides() as $slide): ?>
+        <?php /* @var Scandiweb\Slider\Model\Slide $slide */ ?>
+        <div class="sw-slider-slide">
+            <?php if ($slide->getEmbedCode()): ?>
+                <?php echo $slide->getEmbedCode() ?>
+            <?php else: ?>
+                <img src="<?php echo $slide->getImageUrl() ?>"/>
+            <?php endif ?>
+        </div>
+    <?php endforeach ?>
+</div>
 
+<script type="text/javascript">
+    //<![CDATA[
+    require(['jquery', 'scandiweb/slider', 'scandiweb/rwd-image-maps'], function($) {
+        $('#sw-slider-<?php echo $block->getSliderId() ?>').slick({
+            dots: true,
+            arrows: true
+        });
+    });
+    //]]>
+</script>

@@ -30,6 +30,8 @@ namespace Scandiweb\Slider\Model;
  * @method \Scandiweb\Slider\Model\Slider setSlideLink(string $value)
  * @method string getSlideLinkText()
  * @method \Scandiweb\Slider\Model\Slider setSlideLinkText(string $value)
+ * @method string getEmbedCode()
+ * @method \Scandiweb\Slider\Model\Slider setEmbedCode(string $value)
  * @method int getSlideTextPosition()
  * @method \Scandiweb\Slider\Model\Slider setSlideTextPosition(int $value)
  */

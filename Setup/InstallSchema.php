@@ -38,12 +38,6 @@ class InstallSchema implements InstallSchemaInterface
                 ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
                 'Slider id'
             )->addColumn(
-                'block_id',
-                Table::TYPE_TEXT,
-                255,
-                ['nullable' => false],
-                'Slider block id'
-            )->addColumn(
                 'title',
                 Table::TYPE_TEXT,
                 255,
@@ -216,7 +210,7 @@ class InstallSchema implements InstallSchemaInterface
                 ['nullable' => true],
                 'Slide text to display'
             )->addColumn(
-                'iframe_url',
+                'embed_code',
                 Table::TYPE_TEXT,
                 1000,
                 ['nullable' => true],
