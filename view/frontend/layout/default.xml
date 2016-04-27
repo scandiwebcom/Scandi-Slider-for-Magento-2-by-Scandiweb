@@ -13,5 +13,6 @@
     <head>
         <css src="Scandiweb_Slider::css/slick.css"/>
         <css src="Scandiweb_Slider::css/slick-theme.css"/>
+        <css src="Scandiweb_Slider::css/products.css"/>
     </head>
 </page>

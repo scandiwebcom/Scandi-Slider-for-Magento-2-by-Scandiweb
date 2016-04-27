@@ -41,6 +41,7 @@
     border: none;
     outline: none;
     background: transparent;
+    z-index: 50;
 }
 .slick-prev:hover,
 .slick-prev:focus,
@@ -74,16 +75,25 @@
     line-height: 1;
 
     opacity: .75;
-    color: #000;
+    color: #fff;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-.slick-prev
-{
-    left: -25px;
+.slick-prev {
+    left: 25px;
 }
+
+.slick-next {
+    right: 25px;
+}
+
+button.slick-prev,
+button.slick-next {
+    box-shadow: none;
+}
+
 [dir='rtl'] .slick-prev
 {
     right: -25px;
@@ -98,10 +108,6 @@
     content: '→';
 }
 
-.slick-next
-{
-    right: -25px;
-}
 [dir='rtl'] .slick-next
 {
     right: auto;

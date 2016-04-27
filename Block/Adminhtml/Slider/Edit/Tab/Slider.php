@@ -104,7 +104,7 @@ class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
                 'name' => 'animation_speed',
                 'label' => __('Animation Speed'),
                 'title' => __('Animation Speed'),
-                'note' => __('Default - 500ms, write value as numbers only, in milliseconds (1 second is 1000ms)')
+                'note' => __('Default - 300ms, write value as numbers only, in milliseconds (1 second is 1000ms)')
             ]
         );
 
@@ -153,7 +153,7 @@ class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
             'slides_to_display_tablet',
             'text',
             [
-                'name' => 'slides_to_display',
+                'name' => 'slides_to_display_tablet',
                 'label' => __('Number of slides to display on tablets'),
                 'title' => __('Number of slides to display on tablets'),
                 'note' =>  __('Default - 1, Number of slides displayed simultaneously on tablet devices')
@@ -164,7 +164,7 @@ class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
             'slides_to_scroll_tablet',
             'text',
             [
-                'name' => 'slides_to_scroll',
+                'name' => 'slides_to_scroll_tablet',
                 'label' => __('Number of slides to scroll on tablets'),
                 'title' => __('Number of slides to scroll on tablets'),
                 'note' =>  __('Default - 1, Number of slides scrolled on tablet')

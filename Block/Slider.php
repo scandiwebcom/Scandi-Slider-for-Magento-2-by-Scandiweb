@@ -11,7 +11,7 @@ namespace Scandiweb\Slider\Block;
 
 use Magento\Framework\View\Element\Template;
 
-class Slider extends \Magento\Framework\View\Element\Template
+class Slider extends \Magento\Catalog\Block\Product\AbstractProduct
 {
     /**
      * @var string $_template
@@ -29,6 +29,16 @@ class Slider extends \Magento\Framework\View\Element\Template
     protected $_slideCollectionFactory;
 
     /**
+     * @var \Scandiweb\Slider\Model\ResourceModel\Map\CollectionFactory $_mapCollectionFactory
+     */
+    protected $_mapCollectionFactory;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $_productCollectionFactory
+     */
+    protected $_productCollectionFactory;
+
+    /**
      * @var \Scandiweb\Slider\Model\Slide $_slider
      */
     protected $_slider;
@@ -38,15 +48,30 @@ class Slider extends \Magento\Framework\View\Element\Template
      */
     protected $_slideCollection;
 
+    /**
+     * @var \Scandiweb\Slider\Model\ResourceModel\Map\Collection $_mapCollection
+     */
+    protected $_mapCollection;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection $_productCollection
+     */
+    protected $_productCollection;
+
     public function __construct(
-        Template\Context $context,
+        \Magento\Catalog\Block\Product\Context $context,
         \Scandiweb\Slider\Model\SliderFactory $sliderFactory,
         \Scandiweb\Slider\Model\ResourceModel\Slide\CollectionFactory $slideCollectionFactory,
+        \Scandiweb\Slider\Model\ResourceModel\Map\CollectionFactory $mapCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         array $data
     )
     {
         $this->_sliderFactory = $sliderFactory;
         $this->_slideCollectionFactory = $slideCollectionFactory;
+        $this->_mapCollectionFactory = $mapCollectionFactory;
+        $this->_productCollectionFactory = $productCollectionFactory;
+
         parent::__construct($context, $data);
     }
 
@@ -59,7 +84,7 @@ class Slider extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @return \Scandiweb\Slider\Model\Slide|bool
+     * @return \Scandiweb\Slider\Model\Slider|bool
      */
     public function getSlider()
     {
@@ -86,10 +111,97 @@ class Slider extends \Magento\Framework\View\Element\Template
     {
         if (!$this->_slideCollection) {
             $this->_slideCollection = $this->_slideCollectionFactory->create();
-            $this->_slideCollection;
+            $this->_slideCollection
+                ->addSliderFilter($this->getSlider()->getId())
+                ->addIsActiveFilter();
         }
 
         return $this->_slideCollection;
+    }
+
+    /**
+     * @return \Scandiweb\Slider\Model\ResourceModel\Slide\Collection
+     */
+    public function getMaps()
+    {
+        if (!$this->_mapCollection) {
+            $this->_mapCollection = $this->_mapCollectionFactory->create();
+            $this->_mapCollection
+                ->addSliderFilter($this->getSlider()->getId())
+                ->addIsActiveFilter();
+        }
+
+        return $this->_mapCollection;
+    }
+
+    /**
+     * @param  int $slideId
+     * @return array
+     */
+    public function getSlideMaps($slideId)
+    {
+        $maps = [];
+
+        foreach ($this->getMaps() as $map) {
+            /* @var \Scandiweb\Slider\Model\Map $map */
+            if ($map->getSlideId() == $slideId) {
+                $maps[] = $map;
+            }
+        }
+
+        return $maps;
+    }
+
+    /**
+     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection|bool
+     */
+    public function getMapProducts()
+    {
+        if (!$this->getMaps()->count()) {
+            return false;
+        }
+
+        if (!$this->_productCollection) {
+
+            $productIds = [];
+
+            foreach ($this->getMaps() as $map) {
+                /* @var \Scandiweb\Slider\Model\Map $map */
+                $productIds[] = $map->getProductId();
+            }
+
+            $this->_productCollection = $this->_productCollectionFactory->create();
+            $this->_productCollection->addIdFilter($productIds);
+            $this->_addProductAttributesAndPrices($this->_productCollection);
+        }
+
+        return $this->_productCollection;
+    }
+
+    /**
+     * @param  int $productId
+     * @return \Magento\Catalog\Model\Product|bool
+     */
+    public function getMapProduct($productId)
+    {
+        if ($this->getMapProducts()) {
+            return $this->getMapProducts()->getItemById((int) $productId);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  \Scandiweb\Slider\Model\Map $map
+     * @return string
+     */
+    public function getMapUrl($map)
+    {
+        if ($product = $this->getMapProduct($map->getProductId())) {
+            return $this->getProductUrl($product);
+        }
+
+        return '';
     }
 
     /**
@@ -97,7 +209,7 @@ class Slider extends \Magento\Framework\View\Element\Template
      */
     protected function _toHtml()
     {
-        if (!$this->getSlider()) {
+        if (!$this->getSlider() || !$this->getSlider()->getIsActive()) {
             return '';
         }
 

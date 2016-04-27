@@ -18,11 +18,22 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * @param  int $sliderId
-     * @return $this
+     * @return \Scandiweb\Slider\Model\ResourceModel\Slide\Collection
      */
     public function addSliderFilter($sliderId)
     {
         $this->addFieldToFilter('slider_id', $sliderId);
+
+        return $this;
+    }
+
+    /**
+     * @param  bool $isActive
+     * @return \Scandiweb\Slider\Model\ResourceModel\Slide\Collection
+     */
+    public function addIsActiveFilter($isActive = true)
+    {
+        $this->addFieldToFilter('is_active', $isActive);
 
         return $this;
     }

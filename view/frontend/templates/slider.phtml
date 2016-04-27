@@ -9,26 +9,100 @@
  */
 /* @var Scandiweb\Slider\Block\Widget\Slider $block */
 ?>
+<?php
+$slider = $block->getSlider();
+?>
 <div class="sw-slider" id="sw-slider-<?php echo $block->getSliderId() ?>">
-    <?php foreach ($this->getSlides() as $slide): ?>
+    <?php foreach ($block->getSlides() as $slide): ?>
         <?php /* @var Scandiweb\Slider\Model\Slide $slide */ ?>
         <div class="sw-slider-slide">
             <?php if ($slide->getEmbedCode()): ?>
                 <?php echo $slide->getEmbedCode() ?>
             <?php else: ?>
-                <img src="<?php echo $slide->getImageUrl() ?>"/>
+                <img <?php echo ($slider->getLazyLoad()) ? 'data-lazy' : 'src' ?>="<?php echo $slide->getImageUrl() ?>" usemap="map-<?php echo $slide->getSlideId() ?>"/>
             <?php endif ?>
         </div>
     <?php endforeach ?>
 </div>
 
+<?php if ($block->getMaps()->count()): ?>
+    <script type="text/javascript">
+        require(['scandiweb/slider-products'], function() {});
+    </script>
+    <div class="sw-slider-maps" data-mage-init='{"scandiweb/slider-products": {"productsBlockId": "sw-slider-products-<?php echo $slider->getId() ?>", "sliderId": "sw-slider-<?php echo $block->getSliderId() ?>"}}'>
+        <?php foreach ($block->getSlides() as $slide): ?>
+            <?php /* @var Scandiweb\Slider\Model\Slide $slide */ ?>
+
+            <?php $maps = $block->getSlideMaps($slide->getSlideId()) ?>
+
+            <?php if (empty($maps)): ?>
+                <?php continue; ?>
+            <?php endif ?>
+
+            <map name="map-<?php echo $slide->getSlideId(); ?>">
+                <?php foreach ($block->getSlideMaps($slide->getSlideId()) as $map): ?>
+                    <?php /* @var Scandiweb\Slider\Model\Map $map */ ?>
+
+                    <area shape="poly" data-product-block-id="slider-<?php echo $slide->getSliderId() ?>-product-<?php echo $map->getProductId() ?>"
+                          coords="<?php echo $map->getCoordinates(); ?>" href="<?php echo $block->getMapUrl($map) ?>"
+                          title="<?php echo $map->getTitle() ?>" alt="<?php echo $map->getTitle() ?>"/>
+                <?php endforeach ?>
+            </map>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>
+
+
+<?php if ($productCollection = $block->getMapProducts()): ?>
+    <div id="sw-slider-products-<?php echo $slider->getId() ?>" class="sw-slider-products block widget">
+        <?php foreach ($productCollection as $product): ?>
+            <?php /* @var \Magento\Catalog\Model\Product $product */ ?>
+            <div class="product-item-info" data-product-url="<?php echo $block->getProductUrl($product) ?>" id="slider-<?php echo $slider->getId() ?>-product-<?php echo $product->getId() ?>" style="display:none;">
+                <div class="image">
+                    <?php echo $block->getImage($product, 'category_page_grid')->toHtml() ?>
+                </div>
+                <div class="info">
+                    <p class="name"><?php echo $product->getName() ?></p>
+                    <?php echo $this->getProductPrice($product) ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif ?>
+
 <script type="text/javascript">
     //<![CDATA[
     require(['jquery', 'scandiweb/slider', 'scandiweb/rwd-image-maps'], function($) {
-        $('#sw-slider-<?php echo $block->getSliderId() ?>').slick({
-            dots: true,
-            arrows: true
+
+        /* Init Slider */
+        $('#sw-slider-<?php echo $slider->getId() ?>').slick({
+            dots: <?php echo $slider->getShowMenu() ? 'true' : 'false' ?>,
+            arrows: <?php echo $slider->getShowNavigation() ? 'true' : 'false' ?>,
+            speed: <?php echo $slider->getAnimationSpeed() ? $slider->getAnimationSpeed() : 300 ?>,
+            autoplay: true,
+            autoplaySpeed: <?php echo $slider->getSlideSpeed() ? $slider->getSlideSpeed() : 5000 ?>,
+            slidesToShow: <?php echo $slider->getSlidesToDisplay() ? $slider->getSlidesToDisplay() : 1 ?>,
+            slidesToScroll: <?php echo $slider->getSlidesToScroll() ? $slider->getSlidesToScroll() : 1 ?>,
+            responsive: [
+                {
+                    breakpoint: 1025,
+                    settings: {
+                        slidesToShow: <?php echo $slider->getSlidesToDisplayTablet() ? $slider->getSlidesToDisplayTablet() : 1 ?>,
+                        slidesToScroll: <?php echo $slider->getSlidesToScrollTablet() ? $slider->getSlidesToScrollTablet() : 1 ?>
+                    }
+                },
+                {
+                    breakpoint: 641,
+                    settings: {
+                        slidesToShow: <?php echo $slider->getSlidesToDisplayMobile() ? $slider->getSlidesToDisplayMobile() : 1 ?>,
+                        slidesToScroll: <?php echo $slider->getSlidesToScrollMobile() ? $slider->getSlidesToScrollMobile() : 1 ?>
+                    }
+                }
+            ]
         });
+
+        /* Init image maps */
+        $('#sw-slider-<?php echo $slider->getId() ?>').find('img[usemap]').rwdImageMaps();
     });
     //]]>
 </script>

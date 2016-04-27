@@ -17,12 +17,41 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * @param  int $slideId
-     * @return $this
+     * @param  bool $active
+     * @return \Scandiweb\Slider\Model\ResourceModel\Map\Collection
      */
-    public function addSlideFilter($sliderId)
+    public function addIsActiveFilter($active = true)
     {
-        $this->addFieldToFilter('slide_id', $sliderId);
+        $this->getSelect()->where('main_table.is_active = ?', $active);
+
+        return $this;
+    }
+
+    /**
+     * @param  int $slideId
+     * @return \Scandiweb\Slider\Model\ResourceModel\Map\Collection
+     */
+    public function addSlideFilter($slideId)
+    {
+        $this->addFieldToFilter('slide_id', $slideId);
+
+        return $this;
+    }
+
+    /**
+     * @param  int $sliderId
+     * @return \Scandiweb\Slider\Model\ResourceModel\Map\Collection
+     */
+    public function addSliderFilter($sliderId)
+    {
+        $connection = $this->getConnection();
+
+        $this->getSelect()
+            ->join(
+                ['sss' => $this->getTable('scandiweb_slider_slide')],
+                $connection->quoteInto('main_table.slide_id = sss.slide_id AND sss.slider_id = ?', $sliderId),
+                []
+            );
 
         return $this;
     }
