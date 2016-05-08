@@ -225,8 +225,8 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
             'slide_text_position',
             'select',
             [
-                'label' => __('Status'),
-                'title' => __('Status'),
+                'label' => __('Slide Foreground Text Position'),
+                'title' => __('Slide Foreground Text Position'),
                 'name' => 'slide_text_position',
                 'required' => true,
                 'options' => ['0' => __('Left'), '1' => __('Right'), '2' => __('Center')]

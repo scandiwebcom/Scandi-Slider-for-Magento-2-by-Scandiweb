@@ -113,6 +113,8 @@ class Slider extends \Magento\Catalog\Block\Product\AbstractProduct
             $this->_slideCollection = $this->_slideCollectionFactory->create();
             $this->_slideCollection
                 ->addSliderFilter($this->getSlider()->getId())
+                ->addStoreFilter()
+                ->addDateFilter()
                 ->addIsActiveFilter();
         }
 
@@ -202,6 +204,25 @@ class Slider extends \Magento\Catalog\Block\Product\AbstractProduct
         }
 
         return '';
+    }
+
+    /**
+     * @param  \Scandiweb\Slider\Model\Slide $slide
+     * @return string
+     */
+    public function getSlideTextClass($slide)
+    {
+        $class = 'a-left';
+
+        if ($slide->getSlideTextPosition() == 1) {
+            $class = 'a-right';
+        }
+
+        if ($slide->getSlideTextPosition() == 2) {
+            $class = 'a-center';
+        }
+
+        return $class;
     }
 
     /**

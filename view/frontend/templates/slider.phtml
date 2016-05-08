@@ -16,10 +16,30 @@ $slider = $block->getSlider();
     <?php foreach ($block->getSlides() as $slide): ?>
         <?php /* @var Scandiweb\Slider\Model\Slide $slide */ ?>
         <div class="sw-slider-slide">
+            <?php if ($slide->getSlideLink()): ?>
+                <a href="<?php echo $slide->getSlideLink() ?>">
+            <?php endif ?>
             <?php if ($slide->getEmbedCode()): ?>
                 <?php echo $slide->getEmbedCode() ?>
             <?php else: ?>
                 <img <?php echo ($slider->getLazyLoad()) ? 'data-lazy' : 'src' ?>="<?php echo $slide->getImageUrl() ?>" usemap="map-<?php echo $slide->getSlideId() ?>"/>
+            <?php endif ?>
+
+            <?php if ($slide->getDisplayTitle() or $slide->getSlideText()): ?>
+                <div class="sw-slider-text <?php echo $block->getSlideTextClass($slide) ?>">
+
+                    <?php if ($slide->getDisplayTitle()): ?>
+                        <h2><?php echo $slide->getDisplayTitle() ?></h2>
+                    <?php endif ?>
+
+                    <?php if ($slide->getSlideText()): ?>
+                        <p><?php echo $slide->getSlideText() ?></p>
+                    <?php endif ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($slide->getSlideLink()): ?>
+                </a>
             <?php endif ?>
         </div>
     <?php endforeach ?>

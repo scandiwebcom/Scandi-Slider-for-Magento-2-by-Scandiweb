@@ -23,9 +23,9 @@ define([
 
             mapArea.each(function(i, el) {
                 var area = $(el),
-                    productBlockId = '#' + $(el).attr('data-product-block-id'),
+                    productBlockId = '#' + $(el).data('product-block-id'),
                     productBlock = $(productBlockId),
-                    productUrl = productBlock.attr('data-product-url'),
+                    productUrl = productBlock.data('product-url'),
                     slider = $('#' + this.options.sliderId);
 
                 area.attr('href', productUrl);
