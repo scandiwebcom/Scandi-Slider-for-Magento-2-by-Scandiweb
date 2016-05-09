@@ -97,6 +97,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Filter slides to retrieve only matching current date
+     *
+     * @return \Scandiweb\Slider\Model\ResourceModel\Slide\Collection
      */
     public function addDateFilter()
     {
@@ -104,6 +106,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         $this->getSelect()
             ->where('start_time <= ? OR start_time IS NULL', $dateTime)
             ->where('end_time >= ? OR end_time IS NULL', $dateTime);
+
+        return $this;
+    }
+
+    /**
+     * @return \Scandiweb\Slider\Model\ResourceModel\Slide\Collection
+     */
+    public function addPositionOrder()
+    {
+        $this->getSelect()->order('position ASC');
 
         return $this;
     }

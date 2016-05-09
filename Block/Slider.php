@@ -115,7 +115,8 @@ class Slider extends \Magento\Catalog\Block\Product\AbstractProduct
                 ->addSliderFilter($this->getSlider()->getId())
                 ->addStoreFilter()
                 ->addDateFilter()
-                ->addIsActiveFilter();
+                ->addIsActiveFilter()
+                ->addPositionOrder();
         }
 
         return $this->_slideCollection;
