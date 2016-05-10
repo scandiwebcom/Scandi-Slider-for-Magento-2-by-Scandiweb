@@ -194,6 +194,7 @@ class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
         );
 
         $form->setValues($model->getData());
+        $form->addFieldNameSuffix('slider');
         $this->setForm($form);
 
         return parent::_prepareForm();

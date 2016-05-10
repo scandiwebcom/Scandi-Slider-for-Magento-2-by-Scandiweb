@@ -237,6 +237,7 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
         $values['image'] = $model->getImageUrl();
 
         $form->setValues($values);
+        $form->addFieldNameSuffix('slide');
         $this->setForm($form);
 
         return parent::_prepareForm();
