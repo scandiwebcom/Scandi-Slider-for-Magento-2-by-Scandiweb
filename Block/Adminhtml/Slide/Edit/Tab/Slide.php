@@ -82,17 +82,6 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
         );
 
         $fieldset->addField(
-            'image',
-            'image',
-            [
-                'name' => 'image',
-                'label' => __('Image'),
-                'title' => __('Image'),
-                'required' => true,
-            ]
-        );
-
-        $fieldset->addField(
             'embed_code',
             'text',
             [
@@ -233,11 +222,28 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
             ]
         );
 
+        /**
+         *  We add field name suffix (prefix?) before adding image field because we don't
+         *  prefix the image field
+         */
+        $form->addFieldNameSuffix('slide');
+
+        $fieldset->addField(
+            'image',
+            'image',
+            [
+                'name' => 'image',
+                'label' => __('Image'),
+                'title' => __('Image'),
+                'required' => true,
+            ],
+            'title'
+        );
+
         $values = $model->getData();
         $values['image'] = $model->getImageUrl();
 
         $form->setValues($values);
-        $form->addFieldNameSuffix('slide');
         $this->setForm($form);
 
         return parent::_prepareForm();

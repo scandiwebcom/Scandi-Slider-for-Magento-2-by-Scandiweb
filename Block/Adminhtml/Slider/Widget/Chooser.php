@@ -38,7 +38,7 @@ class Chooser extends Extended
     protected function _construct()
     {
         parent::_construct();
-        $this->setDefaultSort('block_id');
+        $this->setDefaultSort('slider_id');
         $this->setUseAjax(true);
     }
 
@@ -91,7 +91,7 @@ class Chooser extends Extended
             function (grid, event) {
                 var trElement = Event.findElement(event, "tr");
                 var sliderId = trElement.down("td").innerHTML.replace(/^\s+|\s+$/g,"");
-                var sliderTitle = trElement.down("td").next().next().innerHTML;
+                var sliderTitle = trElement.down("td").next().innerHTML;
                 ' .
             $chooserJsObject .
             '.setElementValue(sliderId);
@@ -137,14 +137,6 @@ class Chooser extends Extended
         );
 
         $this->addColumn(
-            'block_id',
-            [
-                'header' => __('Identifier'),
-                'index' => 'block_id',
-            ]
-        );
-
-        $this->addColumn(
             'title',
             [
                 'header' => __('Title'),
@@ -159,6 +151,14 @@ class Chooser extends Extended
                 'index' => 'is_active',
                 'type' => 'options',
                 'options' => [0 => __('Disabled'), 1 => __('Enabled')]
+            ]
+        );
+
+        $this->addColumn(
+            'position',
+            [
+                'header' => __('Position'),
+                'index' => 'position',
             ]
         );
 

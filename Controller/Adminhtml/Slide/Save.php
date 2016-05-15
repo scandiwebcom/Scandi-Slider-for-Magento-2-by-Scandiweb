@@ -30,7 +30,7 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
 
-            /* @var $model /Scandiweb/Slider/Model/Slide */
+            /* @var \Scandiweb\Slider\Model\Slide $model */
             $model = $this->_objectManager->create('Scandiweb\Slider\Model\Slide');
 
             $id = $this->getRequest()->getParam('slide_id');
@@ -43,6 +43,7 @@ class Save extends \Magento\Backend\App\Action
             $model->setData($data);
 
             try {
+
                 if (isset($_FILES['image']['name']) && $_FILES['image']['name']) {
                     /* @var \Magento\MediaStorage\Model\File\Uploader $uploader */
                     $uploader = $this->_objectManager->create(
@@ -65,6 +66,8 @@ class Save extends \Magento\Backend\App\Action
                         $mediaDirectory->getAbsolutePath(\Scandiweb\Slider\Model\Slider::MEDIA_PATH)
                     );
                     $model->setData('image', \Scandiweb\Slider\Model\Slider::MEDIA_PATH . $result['file']);
+                } else if (isset($data['image']['delete']) && $data['image']['delete']) {
+                    $model->unsetData('image');
                 }
 
                 $model->save();
