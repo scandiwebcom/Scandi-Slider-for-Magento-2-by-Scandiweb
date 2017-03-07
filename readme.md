@@ -6,10 +6,10 @@ Scandi Slider 2.0 allows displaying your banner images and videos in a sliding c
 
 Run
 ```
-composer config repositories.scandiweb-slider-2 git git@bitbucket.org:scandiwebassets/slider-2.git
-composer require scandiweb/slider:1.0.1
+composer config repositories.scandiweb-slider-2 git git@github.com:scandiwebcom/Scandi-Slider-for-Magento-2-by-Scandiweb.git
+composer require scandiwebcom/Scandi-Slider-for-Magento-2-by-Scandiweb:1.0.1
 php -f bin/magento setup:upgrade
 ```
 ## Documentation
 
-For documentation you can visit [wiki](https://scandiweb.atlassian.net/wiki/display/MAG2/Scandi+Slider+2.0).
+For documentation you can visit [wiki](..coming soon..).
