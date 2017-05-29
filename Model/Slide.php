@@ -80,4 +80,19 @@ class Slide extends \Magento\Framework\Model\AbstractModel
 
         return $base . $this->getImage();
     }
+
+    /**
+     * @param  bool $secure
+     * @return string|bool
+     */
+    public function getImageMobileUrl($secure = false)
+    {
+        if (!$this->getImageMobile()) {
+            return false;
+        }
+
+        $base = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA, $secure);
+
+        return $base . $this->getImageMobile();
+    }
 }

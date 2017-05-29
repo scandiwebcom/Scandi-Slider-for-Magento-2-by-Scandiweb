@@ -22,7 +22,10 @@ $slider = $block->getSlider();
             <?php if ($slide->getEmbedCode()): ?>
                 <?php echo $slide->getEmbedCode() ?>
             <?php else: ?>
-                <img <?php echo ($slider->getLazyLoad()) ? 'data-lazy' : 'src' ?>="<?php echo $slide->getImageUrl() ?>" usemap="map-<?php echo $slide->getSlideId() ?>"/>
+                <img class="desktop-slide-image" <?php echo ($slider->getLazyLoad()) ? 'data-lazy' : 'src' ?>="<?php echo $slide->getImageUrl() ?>" usemap="map-<?php echo $slide->getSlideId() ?>"/>
+                <?php if ($slide->getImageMobileUrl()): ?>
+                    <img class="mobile-slide-image" <?php echo ($slider->getLazyLoad()) ? 'data-lazy' : 'src' ?>="<?php echo $slide->getImageMobileUrl() ?>" />
+                <?php endif ?>
             <?php endif ?>
 
             <?php if ($slide->getDisplayTitle() or $slide->getSlideText()): ?>

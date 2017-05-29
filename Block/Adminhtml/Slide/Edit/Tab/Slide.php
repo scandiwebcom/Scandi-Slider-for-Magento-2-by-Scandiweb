@@ -243,6 +243,21 @@ class Slide extends \Magento\Backend\Block\Widget\Form\Generic implements
         $values = $model->getData();
         $values['image'] = $model->getImageUrl();
 
+        $fieldset->addField(
+            'image_mobile',
+            'image',
+            [
+                'name' => 'image_mobile',
+                'label' => __('Image mobile'),
+                'title' => __('Image mobile'),
+                'required' => false,
+            ],
+            'image'
+        );
+
+        $values = $model->getData();
+        $values['image_mobile'] = $model->getImageMobileUrl();
+
         $form->setValues($values);
         $this->setForm($form);
 

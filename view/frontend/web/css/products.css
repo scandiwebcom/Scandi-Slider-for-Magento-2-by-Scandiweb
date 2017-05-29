@@ -21,6 +21,21 @@
     padding: 1em;
     margin: 2em 4em;
 }
+.mobile-slide-image {
+    display: none;
+}
+.desktop-slide-image {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .mobile-slide-image {
+        display: block;
+    }
+    .desktop-slide-image {
+        display: none;
+    }
+}
 
 .sw-slider-text.a-right { text-align: right; }
 .sw-slider-text.a-left { text-align: left; }

@@ -39,6 +39,7 @@ class Save extends \Magento\Backend\App\Action
             }
 
             unset($data['image']);
+            unset($data['image_mobile']);
 
             $model->setData($data);
 
@@ -68,6 +69,31 @@ class Save extends \Magento\Backend\App\Action
                     $model->setData('image', \Scandiweb\Slider\Model\Slider::MEDIA_PATH . $result['file']);
                 } else if (isset($data['image']['delete']) && $data['image']['delete']) {
                     $model->unsetData('image');
+                }
+
+                if (isset($_FILES['image_mobile']['name']) && $_FILES['image_mobile']['name']) {
+                    /* @var \Magento\MediaStorage\Model\File\Uploader $uploader */
+                    $uploader = $this->_objectManager->create(
+                        'Magento\MediaStorage\Model\File\Uploader',
+                        ['fileId' => 'image_mobile']
+                    );
+                    $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+
+                    /* @var \Magento\Framework\Image\Adapter\AdapterInterface $imageAdapter */
+                    $imageAdapter = $this->_objectManager->get('Magento\Framework\Image\AdapterFactory')->create();
+                    $uploader->addValidateCallback('image_mobile', $imageAdapter, 'validateUploadFile')
+                        ->setAllowRenameFiles(true)
+                        ->setFilesDispersion(true);
+
+                    /* @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory */
+                    $mediaDirectory = $this->_objectManager->get('Magento\Framework\Filesystem')
+                        ->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
+                    $result = $uploader->save(
+                        $mediaDirectory->getAbsolutePath(\Scandiweb\Slider\Model\Slider::MEDIA_PATH)
+                    );
+                    $model->setData('image_mobile', \Scandiweb\Slider\Model\Slider::MEDIA_PATH . $result['file']);
+                } else if (isset($data['image_mobile']['delete']) && $data['image_mobile']['delete']) {
+                    $model->unsetData('image_mobile');
                 }
 
                 $model->save();
