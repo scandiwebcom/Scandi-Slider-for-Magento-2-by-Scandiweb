@@ -27,7 +27,6 @@
 .desktop-slide-image {
     display: block;
 }
-
 @media (max-width: 600px) {
     .mobile-slide-image {
         display: block;
@@ -36,7 +35,9 @@
         display: none;
     }
 }
-
+.desktop-slide {
+    display: block;
+}
 .sw-slider-text.a-right { text-align: right; }
 .sw-slider-text.a-left { text-align: left; }
 .sw-slider-text.a-center { text-align: center; }

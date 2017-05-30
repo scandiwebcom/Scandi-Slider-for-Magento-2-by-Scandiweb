@@ -1,6 +1,9 @@
 Scandiweb_Slider changelog
 ========================
 
+1.0.3:
+- Minor style fixes for one image resize to hidden
+
 1.0.2:
 - Added mobile image field
 
