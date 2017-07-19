@@ -116,7 +116,7 @@ class Slider extends \Magento\Backend\Block\Widget\Form\Generic implements
                 'label' => __('Slide Speed'),
                 'title' => __('Slide Speed'),
                 'note' => __(
-                    'Default - 5s, write value as numbers only, in seconds. Set how long each slide is displayed.'
+                    'Default - 5000ms (5s), write value as numbers only, in milliseconds. Set how long each slide is displayed.'
                 )
             ]
         );
