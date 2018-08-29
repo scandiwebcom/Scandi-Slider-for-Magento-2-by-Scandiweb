@@ -12,7 +12,7 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
-use Scandiweb\Yotpo\Setup\Setup as ParentSetup;
+use Scandiweb\Slider\Setup\Setup as ParentSetup;
 
 class UpgradeSchema extends ParentSetup implements UpgradeSchemaInterface
 {
